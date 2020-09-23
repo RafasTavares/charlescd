@@ -16,11 +16,11 @@
 
 import { Stage } from '../../interfaces/spinnaker-pipeline.interface'
 import { Component, Deployment } from '../../../../../api/deployments/interfaces'
-import { DeploymentStatusEnum } from '../../../../../../v1/api/deployments/enums'
 import { ExecutionTypeEnum } from '../../../../../api/deployments/enums'
 import { UrlUtils } from '../../../../utils/url.utils'
 import { ConnectorConfiguration } from '../../connector'
 import { DeploymentTemplateUtils } from '../../utils/deployment-template.utils'
+import { DeploymentStatusEnum } from '../../../../../api/deployments/enums/deployment-status.enum'
 
 export const getFailureWebhookStage = (deployment: Deployment, stageId: number, configuration: ConnectorConfiguration): Stage => ({
   completeOtherBranchesThenFail: false,

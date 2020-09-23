@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { ISpinnakerConfigurationData } from '../../../../../../v1/api/configurations/interfaces'
 import { Stage, Subset } from '../../interfaces/spinnaker-pipeline.interface'
 import { Component, Deployment } from '../../../../../api/deployments/interfaces'
 import { CommonTemplateUtils } from '../../utils/common-template.utils'
+import { ISpinnakerConfigurationData } from '../../../../../api/configurations/interfaces/spinnaker-configuration-data.interface'
 
 export const getUndeploymentDestinationRulesStage = (
   component: Component,

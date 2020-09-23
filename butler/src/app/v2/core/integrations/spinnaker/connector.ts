@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import { ConnectorResult, SpinnakerPipeline } from './interfaces'
-import { ICreateSpinnakerApplication } from '../../../../v1/core/integrations/cd/spinnaker/interfaces'
-import { SpinnakerApiService } from '../../../../v1/core/integrations/cd/spinnaker/spinnaker-api.service'
-import { ConsoleLoggerService } from '../../../../v1/core/logs/console'
-import { ISpinnakerConfigurationData } from '../../../../v1/api/configurations/interfaces'
-import { AppConstants } from '../../../../v1/core/constants'
+import { ICreateSpinnakerApplication } from '../cd/spinnaker/interfaces'
+import { SpinnakerApiService } from '../cd/spinnaker/spinnaker-api.service'
 import { SpinnakerPipelineBuilder } from './pipeline-builder'
 import { ConnectorResultError } from './interfaces'
 import { CdConfiguration, Component, Deployment } from '../../../api/deployments/interfaces'
+import { ConsoleLoggerService } from '../../logs/console/console-logger.service'
+import { ISpinnakerConfigurationData } from '../../../api/configurations/interfaces/spinnaker-configuration-data.interface'
+import { DeploymentsConfigurationConstants } from '../../config/constants/deployments-configuration.constants'
 
 export interface ConnectorConfiguration {
     incomingCircleId: string | null
@@ -132,12 +132,12 @@ export class SpinnakerConnector {
   private getSpinnakerApplicationObject(applicationName: string): ICreateSpinnakerApplication {
     return {
       job: [{
-        type: AppConstants.SPINNAKER_CREATE_APPLICATION_JOB_TYPE,
+        type: DeploymentsConfigurationConstants.SPINNAKER_CREATE_APPLICATION_JOB_TYPE,
         application: {
-          cloudProviders: AppConstants.SPINNAKER_CREATE_APPLICATION_DEFAULT_CLOUD,
-          instancePort: AppConstants.SPINNAKER_CREATE_APPLICATION_PORT,
+          cloudProviders: DeploymentsConfigurationConstants.SPINNAKER_CREATE_APPLICATION_DEFAULT_CLOUD,
+          instancePort: DeploymentsConfigurationConstants.SPINNAKER_CREATE_APPLICATION_PORT,
           name: applicationName,
-          email: AppConstants.SPINNAKER_CREATE_APPLICATION_DEFAULT_EMAIL
+          email: DeploymentsConfigurationConstants.SPINNAKER_CREATE_APPLICATION_DEFAULT_EMAIL
         }
       }],
       application: applicationName

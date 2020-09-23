@@ -25,21 +25,21 @@ import * as rTracer from 'cls-rtracer'
 import * as hpropagate from 'hpropagate'
 import * as morgan from 'morgan'
 import { AppModule } from './app/app.module'
-import { AppConstants } from './app/v1/core/constants'
-import { EntityNotFoundExceptionFilter } from './app/v1/core/filters/entity-not-found-exception.filter'
-import { ConsoleLoggerService } from './app/v1/core/logs/console'
+import { EntityNotFoundExceptionFilter } from './app/v2/core/filters/entity-not-found-exception.filter'
 import {
   OctopipeEKSConfigurationDataSchema,
   OctopipeGenericConfigurationDataSchema,
   SpinnakerConfigurationDataSchema
-} from './app/v1/core/validations/schemas'
+} from './app/v2/core/validations/schemas'
+import { ConsoleLoggerService } from './app/v2/core/logs/console/console-logger.service'
+import { DeploymentsConfigurationConstants } from './app/v2/core/config/constants/deployments-configuration.constants'
 
 async function bootstrap() {
 
   hpropagate({
     setAndPropagateCorrelationId: false,
     headersToPropagate: [
-      AppConstants.DEFAULT_CIRCLE_HEADER_NAME
+      DeploymentsConfigurationConstants.DEFAULT_CIRCLE_HEADER_NAME
     ]
   })
 

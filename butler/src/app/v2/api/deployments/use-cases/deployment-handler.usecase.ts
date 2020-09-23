@@ -18,17 +18,17 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { JobWithDoneCallback } from 'pg-boss'
 import { In, Repository } from 'typeorm'
-import { CdConfigurationsRepository } from '../../../../v1/api/configurations/repository'
-import { DeploymentStatusEnum } from '../../../../v1/api/deployments/enums'
-import { IoCTokensConstants } from '../../../../v1/core/constants/ioc'
-import IEnvConfiguration from '../../../../v1/core/integrations/configuration/interfaces/env-configuration.interface'
-import { ConsoleLoggerService } from '../../../../v1/core/logs/console'
+import { IoCTokens } from '../../../core/constants/tokens.constants'
+import IEnvConfiguration from '../../../core/integrations/configuration/interfaces/env-configuration.interface'
 import { SpinnakerConnector } from '../../../core/integrations/spinnaker/connector'
 import { ConnectorResultError } from '../../../core/integrations/spinnaker/interfaces/'
+import { ConsoleLoggerService } from '../../../core/logs/console/console-logger.service'
+import { CdConfigurationsRepository } from '../../configurations/repository/cd-configurations.repository'
 import { ComponentEntityV2 as ComponentEntity } from '../entity/component.entity'
 import { DeploymentEntityV2 as DeploymentEntity } from '../entity/deployment.entity'
 import { Execution } from '../entity/execution.entity'
 import { ExecutionTypeEnum } from '../enums'
+import { DeploymentStatusEnum } from '../enums/deployment-status.enum'
 import { PgBossWorker } from '../jobs/pgboss.worker'
 import { ComponentsRepositoryV2 } from '../repository'
 
@@ -48,7 +48,7 @@ export class DeploymentHandlerUseCase {
     @Inject(forwardRef(() => PgBossWorker))
     private pgBoss: PgBossWorker,
     private spinnakerConnector: SpinnakerConnector,
-    @Inject(IoCTokensConstants.ENV_CONFIGURATION)
+    @Inject(IoCTokens.ENV_CONFIGURATION)
     private envConfiguration: IEnvConfiguration,
   ) { }
 

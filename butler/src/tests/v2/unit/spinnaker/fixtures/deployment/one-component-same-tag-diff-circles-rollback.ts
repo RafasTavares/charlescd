@@ -15,9 +15,9 @@
  */
 
 import { SpinnakerPipeline } from '../../../../../../app/v2/core/integrations/spinnaker/interfaces'
-import { AppConstants } from '../../../../../../app/v1/core/constants'
-import { DeploymentStatusEnum } from '../../../../../../app/v1/api/deployments/enums'
 import { ExecutionTypeEnum } from '../../../../../../app/v2/api/deployments/enums'
+import { DeploymentStatusEnum } from '../../../../../../app/v2/api/deployments/enums/deployment-status.enum'
+import { ConfigurationConstants } from '../../../../../../app/v2/core/constants/configuration.constants'
 
 export const oneComponentSameTagDiffCirclesRollback: SpinnakerPipeline = {
   application: 'app-cd-configuration-id',
@@ -101,10 +101,10 @@ export const oneComponentSameTagDiffCirclesRollback: SpinnakerPipeline = {
       outputName: 'A-v0',
       overrides: {
         'image.tag': 'https://repository.com/A:v0',
-        deploymentName: `A-v0-${AppConstants.DEFAULT_CIRCLE_ID}`,
+        deploymentName: `A-v0-${ConfigurationConstants.DEFAULT_CIRCLE_ID}`,
         component: 'A',
         tag: 'v0',
-        circleId: AppConstants.DEFAULT_CIRCLE_ID
+        circleId: ConfigurationConstants.DEFAULT_CIRCLE_ID
       },
       refId: '1',
       requisiteStageRefIds: [],
@@ -166,9 +166,9 @@ export const oneComponentSameTagDiffCirclesRollback: SpinnakerPipeline = {
                 labels: {
                   component: 'A',
                   tag: 'v0',
-                  circleId: AppConstants.DEFAULT_CIRCLE_ID
+                  circleId: ConfigurationConstants.DEFAULT_CIRCLE_ID
                 },
-                name: AppConstants.DEFAULT_CIRCLE_ID
+                name: ConfigurationConstants.DEFAULT_CIRCLE_ID
               },
               {
                 labels: {
@@ -432,17 +432,17 @@ export const oneComponentSameTagDiffCirclesRollback: SpinnakerPipeline = {
                   {
                     destination: {
                       host: 'A',
-                      subset: AppConstants.DEFAULT_CIRCLE_ID
+                      subset: ConfigurationConstants.DEFAULT_CIRCLE_ID
                     },
                     headers: {
                       request: {
                         set: {
-                          'x-circle-source': AppConstants.DEFAULT_CIRCLE_ID
+                          'x-circle-source': ConfigurationConstants.DEFAULT_CIRCLE_ID
                         }
                       },
                       response: {
                         set: {
-                          'x-circle-source': AppConstants.DEFAULT_CIRCLE_ID
+                          'x-circle-source': ConfigurationConstants.DEFAULT_CIRCLE_ID
                         }
                       }
                     }
@@ -539,7 +539,7 @@ export const oneComponentSameTagDiffCirclesRollback: SpinnakerPipeline = {
             key: 'circleId',
             kind: 'EQUALS',
             values: [
-              AppConstants.DEFAULT_CIRCLE_ID
+              ConfigurationConstants.DEFAULT_CIRCLE_ID
             ]
           }
         ]

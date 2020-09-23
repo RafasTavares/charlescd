@@ -15,9 +15,9 @@
  */
 
 import { SpinnakerPipeline } from '../../../../../../app/v2/core/integrations/spinnaker/interfaces'
-import { AppConstants } from '../../../../../../app/v1/core/constants'
-import { DeploymentStatusEnum } from '../../../../../../app/v1/api/deployments/enums'
 import { ExecutionTypeEnum } from '../../../../../../app/v2/api/deployments/enums'
+import { DeploymentStatusEnum } from '../../../../../../app/v2/api/deployments/enums/deployment-status.enum'
+import { ConfigurationConstants } from '../../../../../../app/v2/core/constants/configuration.constants'
 
 export const oneComponentHostnameGateway: SpinnakerPipeline = {
   application: 'app-cd-configuration-id',
@@ -182,9 +182,9 @@ export const oneComponentHostnameGateway: SpinnakerPipeline = {
                 labels: {
                   component: 'A',
                   tag: 'v0',
-                  circleId: AppConstants.DEFAULT_CIRCLE_ID
+                  circleId: ConfigurationConstants.DEFAULT_CIRCLE_ID
                 },
-                name: AppConstants.DEFAULT_CIRCLE_ID
+                name: ConfigurationConstants.DEFAULT_CIRCLE_ID
               }
             ]
           }
@@ -363,17 +363,17 @@ export const oneComponentHostnameGateway: SpinnakerPipeline = {
                   {
                     destination: {
                       host: 'A',
-                      subset: AppConstants.DEFAULT_CIRCLE_ID
+                      subset: ConfigurationConstants.DEFAULT_CIRCLE_ID
                     },
                     headers: {
                       request: {
                         set: {
-                          'x-circle-source': AppConstants.DEFAULT_CIRCLE_ID
+                          'x-circle-source': ConfigurationConstants.DEFAULT_CIRCLE_ID
                         }
                       },
                       response: {
                         set: {
-                          'x-circle-source': AppConstants.DEFAULT_CIRCLE_ID
+                          'x-circle-source': ConfigurationConstants.DEFAULT_CIRCLE_ID
                         }
                       }
                     }

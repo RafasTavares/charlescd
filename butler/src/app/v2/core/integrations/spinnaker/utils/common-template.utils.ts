@@ -15,7 +15,7 @@
  */
 
 import { Component } from '../../../../api/deployments/interfaces'
-import { AppConstants } from '../../../../../v1/core/constants'
+import { ConfigurationConstants } from '../../../constants/configuration.constants'
 
 const CommonTemplateUtils = {
   getDeploymentName: (component: Component, circleId: string | null): string => {
@@ -23,7 +23,7 @@ const CommonTemplateUtils = {
   },
 
   getCircleId: (circleId: string | null): string => {
-    return circleId ? circleId : AppConstants.DEFAULT_CIRCLE_ID
+    return circleId ? circleId : ConfigurationConstants.DEFAULT_CIRCLE_ID
   }
 }
 

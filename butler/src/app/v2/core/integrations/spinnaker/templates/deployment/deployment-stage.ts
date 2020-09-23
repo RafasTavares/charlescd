@@ -15,8 +15,8 @@
  */
 
 import { Stage } from '../../interfaces/spinnaker-pipeline.interface'
-import { ISpinnakerConfigurationData } from '../../../../../../v1/api/configurations/interfaces'
 import { CdConfiguration, Component } from '../../../../../api/deployments/interfaces'
+import { ISpinnakerConfigurationData } from '../../../../../api/configurations/interfaces/spinnaker-configuration-data.interface'
 
 export const getDeploymentStage = (component: Component, configuration: CdConfiguration, stageId: number): Stage => ({
   account: (configuration.configurationData as ISpinnakerConfigurationData).account,

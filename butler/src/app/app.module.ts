@@ -16,14 +16,11 @@
 
 import { DynamicModule, Global, Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { ApiModule } from './v1/api/api.module'
-import { ApiModule as ApiModuleV2 } from './v2/api/api.module'
-import { Configuration } from './v1/core/config/configurations'
-import { AppConstants } from './v1/core/constants'
-import { CoreModule } from './v1/core/core.module'
-import IEnvConfiguration from './v1/core/integrations/configuration/interfaces/env-configuration.interface'
-import { DatabasesService } from './v1/core/integrations/databases'
-import { IoCTokensConstants } from './v1/core/constants/ioc'
+import { ApiModule } from './v2/api/api.module'
+import { DatabasesService } from './v2/core/integrations/databases'
+import IEnvConfiguration from './v2/core/integrations/configuration/interfaces/env-configuration.interface'
+import { IoCTokens } from './v2/core/constants/tokens.constants'
+import { Configuration } from './v2/core/config/configurations'
 
 @Global()
 @Module({})
@@ -39,9 +36,7 @@ export class AppModule {
     return {
       module: AppModule,
       imports: [
-        CoreModule,
         ApiModule,
-        ApiModuleV2,
         TypeOrmModule.forRootAsync({
           useFactory: () => (
             DatabasesService.getPostgresConnectionOptions(envConfiguration)
@@ -49,10 +44,10 @@ export class AppModule {
         })
       ],
       providers: [{
-        provide: IoCTokensConstants.ENV_CONFIGURATION,
-        useValue: AppConstants.Configuration
+        provide: IoCTokens.ENV_CONFIGURATION,
+        useValue: Configuration
       }],
-      exports: [ IoCTokensConstants.ENV_CONFIGURATION]
+      exports: [ IoCTokens.ENV_CONFIGURATION]
     }
   }
 }

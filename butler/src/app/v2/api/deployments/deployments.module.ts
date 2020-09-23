@@ -16,11 +16,6 @@
 
 import { HttpModule, Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { CdConfigurationEntity } from '../../../v1/api/configurations/entity'
-import { CdConfigurationsRepository } from '../../../v1/api/configurations/repository'
-import { SpinnakerApiService } from '../../../v1/core/integrations/cd/spinnaker/spinnaker-api.service'
-import { MooveService } from '../../../v1/core/integrations/moove'
-import { ConsoleLoggerService } from '../../../v1/core/logs/console'
 import { DeploymentsController } from './controller/deployments.controller'
 import { DeploymentEntityV2 as DeploymentEntity } from './entity/deployment.entity'
 import { Execution } from './entity/execution.entity'
@@ -36,6 +31,11 @@ import { DeploymentRepositoryV2 } from './repository/deployment.repository'
 import { ExecutionRepository } from './repository/execution.repository'
 import { ExecutionsController } from './controller/executions.controller'
 import { PaginatedExecutionsUseCase } from './use-cases/paginated-executions.usecase'
+import { CdConfigurationEntity } from '../configurations/entity/cd-configuration.entity'
+import { CdConfigurationsRepository } from '../configurations/repository/cd-configurations.repository'
+import { ConsoleLoggerService } from '../../core/logs/console/console-logger.service'
+import { MooveService } from '../../core/integrations/moove/moove.service'
+import { SpinnakerApiService } from '../../core/integrations/integrations/cd/spinnaker/spinnaker-api.service'
 
 @Module({
   imports: [

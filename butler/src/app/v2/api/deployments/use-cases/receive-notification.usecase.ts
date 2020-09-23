@@ -17,18 +17,29 @@
 import { InternalServerErrorException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { getConnection, UpdateResult } from 'typeorm'
-import { DeploymentStatusEnum } from '../../../../v1/api/deployments/enums'
-import { NotificationStatusEnum } from '../../../../v1/api/notifications/enums'
-import { QueuedDeploymentsConstraints } from '../../../../v1/core/integrations/databases/constraints'
-import { MooveService } from '../../../../v1/core/integrations/moove'
-import { ConsoleLoggerService } from '../../../../v1/core/logs/console'
+import { QueuedDeploymentsConstraints } from '../../../core/integrations/databases/constraints'
+import { MooveService } from '../../../core/integrations/moove/moove.service'
+import { ConsoleLoggerService } from '../../../core/logs/console/console-logger.service'
 import { DateUtils } from '../../../core/utils/date.utils'
 import { DeploymentNotificationRequestDto } from '../dto/deployment-notification-request.dto'
 import { Execution } from '../entity/execution.entity'
 import { ExecutionTypeEnum } from '../enums'
+import { DeploymentStatusEnum } from '../enums/deployment-status.enum'
 import { ComponentsRepositoryV2 } from '../repository'
 import { DeploymentRepositoryV2 } from '../repository/deployment.repository'
 import { ExecutionRepository } from '../repository/execution.repository'
+
+
+export enum NotificationStatusEnum {
+
+    SUCCEEDED = 'SUCCEEDED',
+    FAILED = 'FAILED',
+    FAILED_CONTINUE = 'FAILED_CONTINUE',
+    SKIPPED = 'SKIPPED',
+    TERMINAL = 'TERMINAL',
+    UNDEPLOYED = 'UNDEPLOYED',
+    UNDEPLOY_FAILED = 'UNDEPLOY_FAILED'
+}
 
 export class ReceiveNotificationUseCase {
 

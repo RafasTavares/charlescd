@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { ISpinnakerConfigurationData } from '../../../../../../v1/api/configurations/interfaces'
 import { ExpectedArtifact } from '../../interfaces/spinnaker-pipeline.interface'
 import { CdConfiguration, Component } from '../../../../../api/deployments/interfaces'
+import { ISpinnakerConfigurationData } from '../../../../../api/configurations/interfaces/spinnaker-configuration-data.interface'
 
 export const getHelmTemplateObject = (component: Component, configuration: CdConfiguration): ExpectedArtifact => ({
   defaultArtifact: {
