@@ -50,8 +50,8 @@ export class FixtureUtilsService {
     return [
       { name: 'CdConfigurationEntity', tableName: 'cd_configurations' },
       { name: 'Execution', tableName: 'v2executions' },
-      { name: 'DeploymentEntity', tableName: 'v2deployments' },
-      { name: 'ComponentEntity', tableName: 'v2components' },
+      { name: 'DeploymentEntityV2', tableName: 'v2deployments' },
+      { name: 'ComponentEntityV2', tableName: 'v2components' },
     ]
   }
 
