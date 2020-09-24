@@ -20,7 +20,8 @@ import {
   Get,
   Headers, Param,
   Post,
-  UsePipes
+  UsePipes,
+  ValidationPipe
 } from '@nestjs/common'
 import {
   CreateCdConfigurationDto,
@@ -43,6 +44,7 @@ export class ConfigurationsController {
 
     @UsePipes(ValidConfigurationDataPipe)
     @Post('cd')
+    @UsePipes(new ValidationPipe({ transform: true }))
   public async createCdConfiguration(
         @Body() createCdConfigurationDto: CreateCdConfigurationDto,
         @Headers('x-workspace-id') workspaceId: string
@@ -52,6 +54,7 @@ export class ConfigurationsController {
   }
 
     @Get('cd')
+    @UsePipes(new ValidationPipe({ transform: true }))
     public async getCdConfigurations(
         @Headers('x-workspace-id') workspaceId: string
     ): Promise<ReadCdConfigurationDto[]> {
@@ -59,7 +62,8 @@ export class ConfigurationsController {
       return await this.getCdConfigurationsUseCase.execute(workspaceId)
     }
 
-    @Delete('cd/:id')
+  @Delete('cd/:id')
+  @UsePipes(new ValidationPipe({ transform: true }))
     public async deleteCdConfigurations(
         @Param('id') id: string,
         @Headers('x-workspace-id') workspaceId: string
