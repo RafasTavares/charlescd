@@ -14,18 +14,26 @@
  * limitations under the License.
  */
 
-import React, { useReducer } from 'react';
+import React from 'react';
+import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'core/assets/style/global';
 import THEME from 'core/assets/themes';
-import { Provider as ContextProvider } from 'core/state/store';
-import { rootState, rootReducer } from 'core/state';
 import { setUserAbilities } from 'core/utils/abilities';
 import { microfrontendKey } from 'core/utils/microfrontend';
+import { baseQuery } from 'core/providers/base/query';
 import Routes from './Routes';
 
 const currentTheme = 'dark';
 setUserAbilities();
+
+const queryCache = new QueryCache({
+  defaultConfig: {
+    queries: {
+      queryFn: baseQuery
+    }
+  }
+});
 
 export const setIsMicrofrontend = (isMicrofrontend?: boolean) => {
   localStorage.setItem(microfrontendKey, isMicrofrontend?.toString());
@@ -39,16 +47,15 @@ interface Props {
 }
 
 function App({ isMicrofrontend }: Props) {
-  const globalState = useReducer(rootReducer, rootState);
   setIsMicrofrontend(isMicrofrontend);
 
   return (
-    <ContextProvider value={globalState}>
+    <ReactQueryCacheProvider cache={queryCache}>
       <ThemeProvider theme={THEME[currentTheme]}>
         <Routes />
         <GlobalStyle />
       </ThemeProvider>
-    </ContextProvider>
+    </ReactQueryCacheProvider>
   );
 }
 

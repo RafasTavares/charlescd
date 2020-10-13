@@ -17,19 +17,23 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
+// import { useQuery } from 'react-query';
 import Icon from 'core/components/Icon';
 import Form from 'core/components/Form';
 import { validFields } from 'core/utils/validation';
 import routes from 'core/constants/routes';
+import useFetch from 'core/providers/base/query';
+import { LOGIN } from 'core/utils/queries';
 import Styled from '../styled';
-import { useLogin } from './hook';
+// import { useLogin } from './hook';
 
 const Login = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const { register, errors, getValues, watch, handleSubmit } = useForm({
     mode: 'onChange'
   });
-  const { doLogin, status, error } = useLogin();
+  // const {} = useQuery('login');
+  // const { doLogin, status, error } = useLogin();
   const history = useHistory();
   const watchFields = watch();
 
@@ -45,7 +49,8 @@ const Login = () => {
 
   const onSubmit = () => {
     const { email, password } = getValues();
-    doLogin(email, password);
+    useFetch([LOGIN, { email, password }]);
+    // doLogin(email, password);
   };
 
   return (
